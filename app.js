@@ -16,6 +16,7 @@ var express = require('express')
   , io = require('socket.io').listen(server)
   , util = require('util')
   , MiniSearch = require('minisearch')
+  , dateFns = require('date-fns')
   , db = require('./lib/db');
 
 app.use(express.static('public'));
@@ -134,6 +135,10 @@ app.get('/register', function(req, res){
   res.render('register', { title: 'Register', message: message, user: req.user });
 });
 
+app.get('/search', function(req, res){
+  res.redirect('/chat')
+});
+
 app.post('/search', function(req, res){
   var miniSearch = new MiniSearch({ fields: ['message', 'from'] })
   db.findMessages(10, function (err, messages) {
@@ -147,6 +152,18 @@ app.post('/search', function(req, res){
       })
       var results = messages.filter(function(m){
         return returned.indexOf(m.id) !== -1
+      })
+      results = results.map(function(r){
+        return Object.assign(r, {
+          timestamp_human: dateFns.distanceInWords(
+            new Date(),
+            new Date(r.timestamp)
+          ),
+          timestamp_pretty: dateFns.format(
+            new Date(r.timestamp),
+            'MM/DD/YYYY HH:mm',
+          )
+        })
       })
       res.render('search', { title: 'Search Results', results: results, query: query, user: req.user });
     }
@@ -260,7 +277,11 @@ io.sockets.on('connection', function (socket) {
     var msg = {
       message: data.message,
       from: connected_user.username,
-      timestamp: new Date().getTime()
+      timestamp: new Date().getTime(),
+      timestamp_human: dateFns.distanceInWords(
+        new Date(),
+        new Date().getTime()
+      )
     }
 
     console.log("[DEBUG][io.sockets][message] New message '%j' from user %s(@%s)", msg, connected_user.username, connected_user.id);
@@ -279,7 +300,13 @@ io.sockets.on('connection', function (socket) {
 
   db.findMessages(10, function (err, messages) {
     if (!err && messages.length > 0) {
-      socket.emit('history', messages);
+      var results = messages.map(function(r){
+        return Object.assign(r, { timestamp_human: dateFns.distanceInWords(
+          new Date(),
+          new Date(r.timestamp)
+        )})
+      });
+      socket.emit('history', results);
     }
   });
 

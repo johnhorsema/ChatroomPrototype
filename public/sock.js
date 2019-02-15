@@ -10,7 +10,7 @@ socket.on('new message', function (data) {
 socket.on('history', function(data) {
   var div = document.getElementById('messages');
   div.innerHTML = null
-  for (var i = 0, len = data.length; i < len; i++) {
+  for (var i = data.length-1; i >= 0; i--) {
     div.innerHTML += makeChatRow(data[i])
   }
   // Scroll to bottom
@@ -39,7 +39,5 @@ document.getElementById('sendmessage').addEventListener('submit', function(e) {
 });
 
 var makeChatRow = function(data) {
-  var date = new Date(data.timestamp);
-  var timestamp = date.toISOString().slice(11, 19)
-  return '<li class="collection-item message">' + '<strong>' + data.from + ' </strong><span class="body">' + data.message + '</span><span class="right grey-text text-lighten-1">' + timestamp + '</span></li>';
+  return '<li class="collection-item message">' + '<div><strong>' + data.from + ' </strong></div><div class="body">' + data.message + '<span class="right grey-text text-lighten-1">' + data.timestamp_human + '</span></div></li>';
 }

@@ -1,16 +1,15 @@
 extend layout
 
 block content
-  .container
-    .section
-      .card-panel
-        h5= title
-        table.highlight
-          thead
-            tr
-              th Username
-              th Messages Sent
-          tbody
-            tr
-              td #{user.username}
-              td #{messages_sent.length}
+  .section
+    .card-panel
+      h5= title
+      table.highlight
+        thead
+          tr
+            th Username
+            th Messages Sent
+        tbody
+          tr
+            td #{user.username}
+            td #{messages_sent.length}

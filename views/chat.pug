@@ -4,35 +4,35 @@ block scripts
   script(src="/socket.io/socket.io.js")
 
 block content
-  .container
-    .section
-      .row
-        .col.m12
-          form(action="search", method="post")
-            .input-field
-              input(value="", type="text", name="query")#search
-              label.active(for="search") Search messages...
-        .col.m3
-          ul.collection#users
-            li.collection-item#users-preloader
-              .preloader-wrapper.small.active
-                .spinner-layer.spinner-green-only
-                  .circle-clipper.left
-                    .circle
-                  .gap-patch
-                    .circle
-                  .circle-clipper.right
-                    .circle
+  .section
+    .row
+      .col.s12
+        form(action="search", method="post")
+          .input-field
+            input(value="", type="text", name="query")#search
+            label.active(for="search") Search messages...
+    .row
+      .col.m3.s12
+        ul.collection#users
+          li.collection-item#users-preloader
+            .preloader-wrapper.small.active
+              .spinner-layer.spinner-green-only
+                .circle-clipper.left
+                  .circle
+                .gap-patch
+                  .circle
+                .circle-clipper.right
+                  .circle
 
-        .col.m9
-          ul.collection#messages
-            li.collection-item No messages. Start chatting now!
-          ul.collection
-            li.collection-item
-              form#sendmessage
-                .input-field
-                  input#message(value="", type="text")
-                  label.active(for="message") Message
-                  input(type="hidden", id="name", value=user.id)
-                  small Press Enter to Submit
+      .col.m9.s12
+        ul.collection#messages
+          li.collection-item No messages. Start chatting now!
+        ul.collection
+          li.collection-item
+            form#sendmessage
+              .input-field
+                input#message(value="", type="text")
+                label.active(for="message") Message
+                input(type="hidden", id="name", value=user.id)
+                small Press Enter to Submit
   script(src="sock.js")

@@ -26,20 +26,11 @@ body {
   align-self: center;
 }
 
-.collection-item.message {
-  display: flex;
-}
-
-.collection-item.message strong {
-  width: 10%;
-}
-
-.collection-item.message .body {
-  width: 90%;
-  padding-right: 2rem;
-}
-
 .collection#messages {
   max-height: 20rem;
   overflow-y: auto;
+}
+
+.input-field, .input-field input#message {
+  margin-bottom: 0;
 }

@@ -1,20 +1,20 @@
 extend layout
 
 block content
-  .container
-    .section
-      .row
-        .col.m12
-          form(action="search", method="post")
-            .input-field
-              input(value=query, type="text", name="query")#search
-              label.active(for="search") Search messages...
-        .col.m12
-          h6= title
-          ul.collection
-            if results.length == 0
-              li.collection-item Not found
-            each result in results
-              li.collection-item.message
-                strong= result.from
-                .body= result.message
+  .section
+    .row
+      .col.s12
+        form(action="search", method="post")
+          .input-field
+            input(value=query, type="text", name="query")#search
+            label.active(for="search") Search messages...
+      .col.s12
+        h6= title
+        ul.collection
+          if results.length == 0
+            li.collection-item Not found
+          each result in results
+            li.collection-item.message
+              strong= result.from
+              .body= result.message
+                span.right.grey-text.text-lighten-1= result.timestamp_pretty
