@@ -1,0 +1,30 @@
+extend layout
+
+block content
+  .container
+    .section
+      .row
+        .col.s12.card-panel.login
+          if message
+            .alert-warning.alert= message
+          form.login-form(action="login", method="post")
+            .row
+              .input-field.col.s12
+                i.material-icons.prefix mail_outline
+                input#username.validate(type='email', name='username')
+                label(for='username', data-error='wrong', data-success='right') Email
+            .row
+              .input-field.col.s12
+                i.material-icons.prefix lock_outline
+                input#password(type='password', name='password')
+                label(for='password') Password
+            .row
+              .input-field.col.s12
+                button.btn.waves-effect.waves-light.col.s12(type='submit') Login
+            .row
+              .input-field.col.s6.m6.l6
+                p.margin.medium-small
+                  a(href='/register') Register Now
+              .input-field.col.s6.m6.l6
+                p.margin.right-align.medium-small
+                  a(href='#') Forgot password?

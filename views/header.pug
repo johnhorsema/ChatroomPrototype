@@ -1,0 +1,31 @@
+nav
+  .nav-wrapper
+    a.brand-logo(href='/') Chat App
+    a.sidenav-trigger(href='#', data-target='mobile-demo')
+      i.material-icons menu
+    ul#nav-mobile.right.hide-on-med-and-down
+      if !user
+        li
+          a(href='/register') Register
+        li
+          a(href='/login') Login
+      else
+        li
+          a(href='/chat') Chat
+        li
+          a(href='/account') Account
+        li
+          a(href='/logout') Logout
+ul#mobile-demo.sidenav
+  if !user
+    li
+      a(href='/register') Register
+    li
+      a(href='/login') Login
+  else
+    li
+      a(href='/chat') Chat
+    li
+      a(href='/account') Account
+    li
+      a(href='/logout') Logout

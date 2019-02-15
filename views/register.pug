@@ -1,0 +1,37 @@
+extend layout
+
+block content
+  .container
+    .section
+      .row
+        .col.s12.card-panel.login
+          if message
+            .alert-warning.alert= message
+          form.login-form(action="register", method="post")
+            .row
+              .input-field.col.s12
+                i.material-icons.prefix mail_outline
+                input#username.validate(type='text', name='username')
+                label(for='username', data-error='wrong', data-success='right') Username
+            .row
+              .input-field.col.s12
+                i.material-icons.prefix mail_outline
+                input#email.validate(type='email', name='email')
+                label(for='email', data-error='wrong', data-success='right') Email
+            .row
+              .input-field.col.s12
+                i.material-icons.prefix lock_outline
+                input#password(type='password', name='password')
+                label(for='password') Password
+            .row
+              .input-field.col.s12
+                i.material-icons.prefix lock_outline
+                input#password2(type='password', name='password2')
+                label(for='password2') Password Confirmation
+            .row
+              .input-field.col.s12
+                button.btn.waves-effect.waves-light.col.s12(type='submit') Register
+            .row
+              .input-field.col.s6.m6.l6
+                p.margin.medium-small
+                  a(href='/login') Have an Account?
